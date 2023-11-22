@@ -1,0 +1,126 @@
+<div class="container">
+
+  <h3 style="font-size: xx-large; margin-top: 20px; font-weight:600;">CHECK OUT</h3>
+
+  <div class="row">
+
+    <div class="col-md-7">
+
+
+      <form [formGroup]="checkoutForm" class="row g-3" >
+
+
+        <div class="col-12">
+          <input type="text" class="form-control" id="name" formControlName="name" name="name" placeholder="Name">
+          <div *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched" style="color: brown;">
+            Please enter your name!
+          </div>
+        </div>
+        <div class="col-12">
+          <input type="text" class="form-control" id="address" formControlName="address" name="address" placeholder="Address">
+          <div *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched" style="color: brown;">
+            Please enter your address!
+          </div>
+        </div>
+          <div class="col-md-4">
+              <select class="form-select" [(ngModel)]="citySelected" (ngModelChange)="getDistrict($event)" [ngModelOptions]="{standalone: true}">
+                <option disabled [ngValue]="citySelected">{{citySelected.defaultValue}}</option>
+                <option [selected]="citySelected.name===city.name" *ngFor="let city of cities" [ngValue]="city" >
+                  {{city.name}}
+                </option>
+              </select>
+          </div>
+
+          <div class="col-md-4">
+            <select class="form-select" [(ngModel)]="districtSelected" (ngModelChange)="getWard($event)" [ngModelOptions]="{standalone: true}">
+              <option disabled [ngValue]="districtSelected">{{districtSelected.defaultValue}}</option>
+              <option [selected]="districtSelected.name===district.name" *ngFor="let district of districts" [ngValue]="district">
+                {{district.name}}
+              </option>
+            </select>
+        </div>
+          <div class="col-md-4">
+              <select class="form-select" [(ngModel)]="wardSelected" [ngModelOptions]="{standalone: true}">
+                <option disabled [ngValue]="wardSelected">{{wardSelected.defaultValue}}</option>
+                <option [selected]="wardSelected.name===ward.name" *ngFor="let ward of wards" [ngValue]="ward">
+                  {{ward.name}}
+                </option>
+              </select>
+          </div>
+        <div class="col-12">
+          <input type="text" class="form-control" id="email" formControlName="email" name="email" placeholder="Email">
+          <div *ngIf="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched" style="color: brown;">
+            Please enter your email!
+          </div>
+        </div>
+
+        <div class="col-12">
+          <input type="text" class="form-control" id="phone" formControlName="phone" name="phone" placeholder="Phone Number">
+          <div *ngIf="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched" style="color: brown;">
+            Please enter your phone!
+          </div>
+        </div>
+        <div class="col-12">
+          <button
+          class="btn btn-primary"
+          [disabled]="!checkoutForm.valid"
+          (click)="placeOrder()"
+        >
+          PLACE ORDER
+        </button>
+        </div>
+
+
+      </form>
+
+    </div>
+
+    <div class="col-md-5">
+      <div class="inf-checkout">
+        <strong style="font-size: xx-large;">Summary</strong>
+      </div>
+      <div class="row">
+        <div class="col-6">
+            <div class="inf-checkout" >Subtotal:</div>
+            <div class="inf-checkout" >Ship Cost:</div>
+            <div class="inf-checkout" >Total</div>
+        </div>
+        <div class="col-6">
+              <div class="inf-checkout" >{{totalPrice | currency}}</div>
+              <div class="inf-checkout" >Free</div>
+              <div class="inf-checkout" >{{totalPrice | currency}}</div>
+        </div>
+      </div>
+  <div>
+      <div *ngFor="let item of cart" class="row">
+        <hr>
+        <div class="col-6" >
+          <img src="assets/img/{{item.product.images[0].link}}" width="150px" height="150px">
+        </div>
+        <td class="col-6">
+          <div class="inf-checkout" >
+            <strong>{{item.product.name}}</strong>
+          </div>
+          <div class="inf-checkout" >
+            Qty: {{item.quantity}}
+          </div>
+          <div class="inf-checkout" >
+            Color: {{item.product.color}}
+          </div>
+          <div class="inf-checkout" >
+            Brand: {{item.product.brand}}
+          </div>
+          <div class="inf-checkout" >
+            {{item.product.price * item.quantity| currency}}
+          </div>
+        </td>
+      </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+

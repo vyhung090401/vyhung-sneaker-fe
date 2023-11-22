@@ -1,0 +1,32 @@
+.order-item{
+  display: flex;
+  align-items: center;
+  background-color: rgb(212, 212, 212);
+  height: 110px;
+  border: 1px solid black;
+}
+
+/* .order-item row{
+  padding-top: 10%;
+} */
+.col-6{
+  margin-top: 10px;
+}
+
+.inf{
+  font-size: larger;
+  padding-top: 5px;
+}
+
+.status-item{
+  width: 120px;
+  border: 2px solid;
+  border-radius: 30px;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  background-color: #212529;
+  color: white;
+  margin: 10px 10px;
+}

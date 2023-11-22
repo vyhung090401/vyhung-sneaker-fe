@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+  <a class="navbar-brand" style="cursor: pointer;">
+    <img src="assets/img/logo2.png" routerLink="" class="nav-link" width="70px" height="70px">
+  </a>
+  <ul class="navbar-nav" *ngIf="!isAdmin" >
+    <li class="nav-item" >
+      <a routerLink="shopping" routerLinkActive="active" class="nav-link">Products</a>
+    </li>
+    <li class="nav-item" >
+      <a routerLink="account-list" routerLinkActive="active" class="nav-link">Contact</a>
+    </li>
+  </ul>
+  <ul class="navbar-nav" *ngIf="isAdmin">
+    <li class="nav-item" >
+      <a routerLink="admin/product-list" routerLinkActive="active" class="nav-link">Product List</a>
+    </li>
+    <li class="nav-item" >
+      <a routerLink="admin/account-list" routerLinkActive="active" class="nav-link">Account List</a>
+    </li>
+    <li class="nav-item" >
+      <a routerLink="admin/order-list" routerLinkActive="active" class="nav-link">Order List</a>
+    </li>
+  </ul>
+
+
+  <ul class="navbar-nav" *ngIf="!username">
+    <li>
+      <div class="d-flex align-items-center search">
+        <app-search (searchTextChanged)="onSearchTextEntered($event) " class="mr-3"></app-search>
+        <section class="search-result" *ngIf="dropdownProductsResult.length>0" >
+          <div *ngFor="let product of dropdownProductsResult let  i = index" class="product-item"  (click)="goToProductDetail(product.id)">
+            <hr *ngIf="i > 0">
+              <td><img src="assets/img/{{product.images[0].link}}"  width="100px" height="100px"></td>
+              <td style="width: 100%;color: black;">
+                  <tr>{{product.name}}</tr>
+                  <tr>{{product.brand}}</tr>
+              </td>
+              <td>{{product.price|currency}}</td>
+          </div>
+        </section>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="auth/register">Sign Up</a>
+    </li>
+    <li class="nav-item">
+      <a  class="nav-link" routerLink="auth/login">Login</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav flex-row justify-content-end flex-grow-1" *ngIf="username">
+    <li *ngIf="!isAdmin">
+      <div class="d-flex align-items-center search">
+        <app-search (searchTextChanged)="onSearchTextEntered($event) " class="mr-3"></app-search>
+        <section class="search-result" *ngIf="dropdownProductsResult.length>0" >
+          <div *ngFor="let product of dropdownProductsResult let  i = index" class="product-item"  (click)="goToProductDetail(product.id)">
+            <hr *ngIf="i > 0">
+              <td><img src="assets/img/{{product.images[0].link}}"  width="100px" height="100px"></td>
+              <td style="width: 100%;color: black;">
+                  <tr>{{product.name}}</tr>
+                  <tr>{{product.brand}}</tr>
+              </td>
+              <td>{{product.price|currency}}</td>
+          </div>
+        </section>
+      </div>
+    </li>
+    <li *ngIf="!isAdmin">
+      <a class="cart-link" style="display: inline-block; position: relative;" routerLink="cart-detail" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path fill="none" stroke="#ededed" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M80 176a16 16 0 0 0-16 16v216c0 30.24 25.76 56 56 56h272c30.24 0 56-24.51 56-54.75V192a16 16 0 0 0-16-16Zm80 0v-32a96 96 0 0 1 96-96h0a96 96 0 0 1 96 96v32"/></svg>
+        <span class="count-item-cart" routerLink="cart-detail">{{totalCartItem}}</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a  class="nav-link" routerLink="/profile/profile-account">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M331.08 338.205c-22.156 12.594-47.777 19.783-75.084 19.783-27.302 0-52.919-7.182-75.073-19.771C122.153 356.152 77.262 396 64 448h384c-13.255-52-58.146-91.869-116.92-109.795z" fill="#dedede"/><path d="M255.996 64c-72.871 0-131.945 59.127-131.945 132.013 0 72.887 59.074 131.972 131.945 131.972S387.941 268.9 387.941 196.013C387.941 123.127 328.867 64 255.996 64zm0 230.986c-41.958 0-77.813-25.986-92.209-62.986h184.418c-14.396 37-50.252 62.986-92.209 62.986z" fill="#dedede"/></svg>
+        <span>{{username}}</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="!isAdmin" >
+      <a routerLink="order-history" routerLinkActive="active" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16"><path fill="#dedede" d="M14.341 3.579c-.347-.473-.831-1.027-1.362-1.558S11.894 1.006 11.421.659C10.615.068 10.224 0 10 0H2.25C1.561 0 1 .561 1 1.25v13.5c0 .689.561 1.25 1.25 1.25h11.5c.689 0 1.25-.561 1.25-1.25V5c0-.224-.068-.615-.659-1.421zm-2.07-.85c.48.48.856.912 1.134 1.271h-2.406V1.595c.359.278.792.654 1.271 1.134zM14 14.75c0 .136-.114.25-.25.25H2.25a.253.253 0 0 1-.25-.25V1.25c0-.135.115-.25.25-.25H10v3.5a.5.5 0 0 0 .5.5H14v9.75z"/><path fill="#dedede" d="M11.5 13h-7a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zm0-2h-7a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zm0-2h-7a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1z"/></svg>
+        <span>Order History</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="logout()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path fill="none" stroke="#dedede" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M192 176v-40a40 40 0 0 1 40-40h160a40 40 0 0 1 40 40v240a40 40 0 0 1-40 40H240c-22.09 0-48-17.91-48-40v-40"/><path fill="none" stroke="#dedede" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="m288 336l80-80l-80-80M80 256h272"/></svg>
+        <span>LogOut</span>
+      </a>
+    </li>
+  </ul>
+  </div>
+</nav>

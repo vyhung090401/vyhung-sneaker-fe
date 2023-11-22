@@ -1,0 +1,76 @@
+<div class="log-in d-flex flex-column align-items-center ">
+    <form
+    name="form"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidate
+  >
+  <div class="text-center mb-3 ">
+    <img src="assets/img/logo2.png"  width="70px" height="70px">
+  </div>
+  <p>Login</p>
+    <div class="form-floating mb-3 ">
+      <input
+        placeholder="Username"
+        id="floatingInput"
+        type="text"
+        class="form-control"
+        name="username"
+        [(ngModel)]="form.username"
+        required
+        #username="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+      />
+      <label for="floatingInput">Username</label>
+      <div
+        *ngIf="username.errors && f.submitted"
+        class="invalid-feedback"
+        style="color: rgb(160, 0, 0)"
+      >
+        Username is required!
+      </div>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        id="floatingPassword"
+        placeholder="Password"
+        type="password"
+        class="form-control"
+        name="password"
+        [(ngModel)]="form.password"
+        required
+        #password="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+      />
+      <label for="floatingPassword">Password</label>
+      <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+        <div *ngIf="password.errors['required']" style="color: rgb(160, 0, 0)">
+          Password is required
+        </div>
+      </div>
+    </div>
+    <div class="form-group p-0">
+      <button style="width: 100%;" class="btn btn-primary btn-block">Login</button>
+    </div>
+    <div class="form-group">
+      <div
+        *ngIf="f.submitted && isLoginFailed"
+        class="alert alert-danger"
+        role="alert"
+      >
+        Login failed: {{ errorMessage }}
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-success" *ngIf="isLoggedIn">
+    Logged in as {{ roles }}.
+  </div>
+  <div>
+    <a routerLink="/auth/forgot">Forgotten password ?</a>
+  </div>
+  <div>
+    <a routerLink="/auth/register">Sign up</a>
+  </div>
+</div>
+

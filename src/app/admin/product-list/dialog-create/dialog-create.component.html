@@ -1,0 +1,158 @@
+<h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">{{ data.message }}</h3>
+
+<div mat-dialog-content>
+  <form [formGroup]="productForm">
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Product's Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name" name="name">
+          <div *ngIf="productForm.get('name')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Name is required
+          </div>
+        </div>
+        <!-- Các trường dữ liệu khác tương tự -->
+
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Status</label>
+          <select class="form-control form-select"
+                  id="status"
+                  formControlName="status">
+            <option value="Available">Available</option>
+            <option value="OutOfStock">Out Of Stock</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
+          <div *ngIf="productForm.get('status')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Status is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Product's Color</label>
+          <input type="text" class="form-control" id="color" formControlName="color">
+          <div *ngIf="productForm.get('color')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Color is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Product's Brand</label>
+          <input type="text" class="form-control" id="brand" formControlName="brand">
+          <div *ngIf="productForm.get('brand')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Brand is required
+          </div>
+        </div>
+      </div>
+      <div class="col-8 border-start ">
+        <div class="form-group">
+            <span class="not-null">*</span>
+            <label class="pb-2">Product's Image</label>
+        </div>
+        <div class="form-group">
+          <input type="file" class="form-control" id="image" formControlName="image"  multiple value="select" (change)="onFileSelected($event)">
+          <div *ngIf="productForm.get('image')?.invalid && isSubmitted" style="color: rgb(160, 0, 0)">
+          Image is required
+          </div>
+        </div>
+        <h2 >Selected Image</h2>
+        <div class="form-group">
+          <div class="row">
+            <div *ngFor="let image of imageSelect let i = index" class="col-2 img-container">
+              <span class="btn-remove-image" (click)="removeImageSelected(i)">x</span>
+              <img  src="assets/img/{{image.file.name}}" width="100px" height="100px" >
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label class="pb-2">Opening Stock</label>
+          <div class="row">
+            <table>
+              <td>
+                <tr>
+                  <label for="">Size</label>
+                </tr>
+                <tr>
+                  <label for="">Quantity</label>
+                </tr>
+              </td>
+              <div *ngIf="isLoaded" formArrayName="productSize">
+                <td *ngFor="let s of productSize.controls;let i = index" >
+                  <div [formGroupName]="i">
+                    <tr>
+                      <label style="width: 35px;">{{getSizeNumber(i)}}</label>
+                    </tr>
+                    <tr>
+                      <input type="text" formControlName="quantity" style="width: 35px;">
+                    </tr>
+                  </div>
+                </td>
+              </div>
+            </table>
+          </div>
+        </div>
+        <form [formGroup]="goodsReceiptForm">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  <span class="not-null">*</span>
+                  <label>Supplier</label>
+                </th>
+                <th>
+                  <span class="not-null">*</span>
+                  <label>Cost Price</label>
+                </th>
+                <th>
+                  <span class="not-null">*</span>
+                  <label>Selling Price</label>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <select class="form-control form-select"
+                            id="inventoryName"
+                            formControlName="inventoryName">
+                      <option *ngFor="let i of inventoryList" [value]="i.name">{{i.name}}</option>
+                    </select>
+                    <div *ngIf="goodsReceiptForm.get('inventoryName')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+                      Supplier is required
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="purchasePrice" formControlName="purchasePrice" name="purchasePrice">
+                    <div *ngIf="goodsReceiptForm.get('purchasePrice')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+                      Cost Price is required
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="retailPrice" formControlName="retailPrice" name="retailPrice">
+                    <div *ngIf="goodsReceiptForm.get('retailPrice')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+                      Selling Price is required
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-secondary" (click)="onYesClick()" style="margin-right: 10px;">Confirm</button>
+  <button class="btn btn-success" mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+</div>
+

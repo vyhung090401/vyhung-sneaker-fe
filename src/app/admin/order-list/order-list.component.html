@@ -1,0 +1,60 @@
+<h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">HISTORY ORDER</h3>
+<div class="menu-status">
+  <div  *ngFor="let s of status">
+    <div (click)="getOrderByStatus(s)" [class.selected]="s === selectedStatus" class="status-item">{{s}}</div>
+  </div>
+</div>
+<div style="display: flex;align-items: center;">
+  <span>Find Order: </span>
+  <input type="text" class="form-control" style="width: 200px;" placeholder="Enter Order's ID" [(ngModel)] = "enteredSearchValue" (ngModelChange)="onSearchTextChanged($event)">
+
+</div>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th style="display: flex; align-items: center;">
+        Date Created
+        <select class="form-select d-flex justify-content-end" style="width: 160px;" [(ngModel)]="initFilterDate" (change)="filterDate(initFilterDate)">
+          <option value="1" selected>
+            Nearest Date
+          </option>
+          <option value="2">
+            Furthest Date
+          </option>
+        </select>
+      </th>
+      <th>Status</th>
+      <th>Order Total</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders ">
+      <td> {{order.id}} </td>
+      <td> {{order.name}} </td>
+      <td> {{order.createDate| date:'medium'}} </td>
+      <td> {{order.status}} </td>
+      <td> {{order.orderTotal| currency}} </td>
+      <td>
+        <button class="btn btn-primary" (click)="openEditDialog(order.id!)">View Detail</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="currentPage === 0 ? 'disabled' : 'page-item'">
+      <a  class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage - 1)">Previous</a>
+    </li>
+
+    <li *ngFor="let pageNumber of [].constructor(totalPages) ; let i = index;  " class="page-item" [ngClass]="currentPage === i ? 'disabled' : 'page-item'"  >
+      <a (click)="goToPage(i)" class="page-link" href="javascript:void(0)" >{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item" [ngClass]="currentPage === totalPages-1 ? 'disabled' : 'page-item'">
+      <a class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage + 1)" >Next</a>
+    </li>
+  </ul>
+</nav>

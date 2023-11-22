@@ -1,0 +1,128 @@
+<h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">INVENTORY</h3>
+<div class="category">
+  <div class="item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path fill="#000000" d="M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208s208-93.31 208-208S370.69 48 256 48Zm96 224h-80v80h-32v-80h-80v-32h80v-80h32v80h80Z"/></svg>    <div class="content">
+      <button style="width: 170px; height: 38px" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">New Inventory</button>
+    </div>
+  </div>
+  <div class="item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="#212529" d="m213.66 82.34l-56-56A8 8 0 0 0 152 24H56a16 16 0 0 0-16 16v176a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V88a8 8 0 0 0-2.34-5.66ZM152 160h-16v16a8 8 0 0 1-16 0v-16h-16a8 8 0 0 1 0-16h16v-16a8 8 0 0 1 16 0v16h16a8 8 0 0 1 0 16Zm0-72V43.31L196.69 88Z"/></svg>
+    <div class="content">
+      <button  style="width: 170px; height: 38px" class="btn btn-primary"><a routerLink="/admin/inventory-receipt">Export/Reciept</a></button>
+    </div>
+  </div>
+  <div class="item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#212529" d="M10.18 17H7v-2h3c.08-.68.23-1.36.5-2H7v-2h4.82c.03-.03.05-.06.08-.1A6.53 6.53 0 0 1 16.5 9H7V7h10v2h-.5c1.62 0 3.24.61 4.5 1.82V5a2 2 0 0 0-2-2h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h8.06c-.41-.26-.8-.55-1.16-.9c-.9-.89-1.45-1.97-1.72-3.1M12 3c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1m8.31 14.9c.44-.69.69-1.52.69-2.4c0-2.5-2-4.5-4.5-4.5S12 13 12 15.5s2 4.5 4.5 4.5c.87 0 1.69-.25 2.38-.68L22 22.39L23.39 21l-3.08-3.1m-3.81.1a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5Z"/></svg>
+    <div class="content">
+      <button style="width: 170px; height: 38px" class="btn btn-primary">History Report</button>
+    </div>
+  </div>
+  <div class="item">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="#212529" d="M120 176a12 12 0 0 1-12 12H80a12 12 0 0 1 0-24h28a12 12 0 0 1 12 12Zm56-12h-28a12 12 0 0 0 0 24h28a12 12 0 0 0 0-24Zm76 52a12 12 0 0 1-12 12H16a12 12 0 0 1 0-24h12V88a12 12 0 0 1 19.2-9.6L92 112V88a12 12 0 0 1 19.2-9.6l33.33 25l10.61-74.23A20.1 20.1 0 0 1 174.94 12h18.12a20.1 20.1 0 0 1 19.8 17.17l15 105.13c0 .1.12 1.34.12 1.7v68h12A12 12 0 0 1 252 216Zm-85.57-96.17L172 124h30.16l-12.57-88h-11.18ZM52 204h152v-56h-36a12 12 0 0 1-7.2-2.4l-14.38-10.78h-.06L116 112v24a12 12 0 0 1-19.2 9.6L52 112Z"/></svg>
+    <div class="content">
+      <button  style="width: 170px; height: 38px" class="btn btn-primary">Storage Locations</button>
+    </div>
+  </div>
+</div>
+<table class="table table-striped align-items-center ">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Product Name</th>
+      <th>Export Qty/Inventory Qty</th>
+      <th>Color</th>
+      <th>Brand</th>
+      <th>Cost price</th>
+      <th>Selling price</th>
+      <th>Warehouse</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ip of inventoryProducts">
+      <td> {{ip.id}} </td>
+      <td> {{ip.productName}} </td>
+      <td> {{ip.exportProductQty}}/{{ip.inventoryProductQty}} </td>
+      <td> {{ip.color}} </td>
+      <td> {{ip.brand}} </td>
+      <td> {{ip.purchasePrice}} </td>
+      <td> {{ip.retailPrice}} </td>
+      <td> {{ip.inventoryName}} </td>
+      <td>
+        <button class="btn btn-primary"><strong style="font-size: 14px;">Details</strong></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-pagination *ngIf="loadedPagination" [currentPage]="currentPage" [pageSize]="pageSize" [totalPages]="totalPages" (goTo)="goToPage($event)"></app-pagination>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Add Inventory</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="inventoryForm">
+          <div class="form-group">
+            <span class="not-null">*</span>
+            <label>Inventory's Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" name="name">
+            <div *ngIf="inventoryForm.get('name')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+              Product's Name is required
+            </div>
+          </div>
+          <div class="form-group mt-4">
+            <span class="not-null">*</span>
+            <label>Inventory's Address</label>
+            <input type="text" class="form-control" id="address" formControlName="address" name="address" placeholder="Address">
+              <div *ngIf="inventoryForm.get('address')?.invalid && isSubmitted" style="color: brown;">
+                Please enter your Address!
+              </div>
+          </div>
+          <div class="row mt-4 ">
+            <div class="col-md-4">
+              <select class="form-select" id="city" formControlName="city" name="city" [(ngModel)]="citySelected" (ngModelChange)="getDistrict($event)">
+                <option disabled [ngValue]="citySelected">{{citySelected.defaultValue}}</option>
+                <option [selected]="citySelected.name===city.name" *ngFor="let city of cities" [ngValue]="city" >
+                  {{city.name}}
+                </option>
+              </select>
+              <div *ngIf="inventoryForm.get('city')?.invalid && isSubmitted" style="color: brown;">
+                Please enter your City!
+              </div>
+          </div>
+
+          <div class="col-md-4">
+            <select class="form-select" id="district" formControlName="district" name="district" [(ngModel)]="districtSelected" (ngModelChange)="getWard($event)" >
+              <option disabled [ngValue]="districtSelected">{{districtSelected.defaultValue}}</option>
+              <option [selected]="districtSelected.name===district.name" *ngFor="let district of districts" [ngValue]="district">
+                {{district.name}}
+              </option>
+            </select>
+            <div *ngIf="inventoryForm.get('district')?.invalid && isSubmitted" style="color: brown;">
+              Please enter your District!
+            </div>
+          </div>
+          <div class="col-md-4">
+              <select class="form-select" id="ward" formControlName="ward" name="ward" [(ngModel)]="wardSelected" >
+                <option disabled [ngValue]="wardSelected">{{wardSelected.defaultValue}}</option>
+                <option [selected]="wardSelected.name===ward.name" *ngFor="let ward of wards" [ngValue]="ward">
+                  {{ward.name}}
+                </option>
+              </select>
+              <div *ngIf="inventoryForm.get('ward')?.invalid && isSubmitted" style="color: brown;">
+                Please enter your Ward!
+              </div>
+          </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-start">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="onSubmit()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

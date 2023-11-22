@@ -1,0 +1,83 @@
+.image-toggle-btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+.prev-btn {
+  left: 5%;
+}
+
+.next-btn {
+  right: 5%;
+}
+
+.form-group{
+  padding: 10px;
+}
+
+.btn {
+  border-radius: 30px;
+  width: 300px;
+  height: 50px;
+  background-color: #343a40;
+  border-color: #343a40;
+  color: aliceblue;
+}
+
+.list-img{
+  width: fit-content;
+  padding-top: 10px;
+}
+
+.item-img:hover{
+  opacity: 0.5;
+}
+
+.img-product{
+  background-color: rgb(219, 219, 219);
+  width: fit-content;
+  padding: 20px;
+  display: flex;
+}
+
+.container{
+  padding: 20px;
+}
+
+.list-img{
+  padding-right: 20px;
+}
+
+.product-size{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px ;
+}
+
+.size-item{
+  border: 1px solid black;
+  padding: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  width: 40px;
+}
+
+.size-item:hover , .size-item.active {
+  background-color: #202020;
+  color: white;
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.selected{
+  background-color: #202020;
+  color: white;
+}
+.btn.soldout{
+  background-color: red;
+}

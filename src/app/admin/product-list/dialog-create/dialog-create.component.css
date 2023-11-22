@@ -1,0 +1,35 @@
+.img-container {
+  position: relative;
+}
+
+.img-container img {
+  display: block;
+}
+
+.btn-remove-image {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  text-align: center;
+  height: auto;
+  cursor: pointer;
+}
+.btn-success{
+  margin-right: 10px;
+}
+.not-null {
+  /* position: absolute;
+  top: 23px;
+  right: 0px; */
+  color: #ed1846;
+  font-size: 20px;
+  z-index: 1;
+}
+
+label{
+  color: black;
+}

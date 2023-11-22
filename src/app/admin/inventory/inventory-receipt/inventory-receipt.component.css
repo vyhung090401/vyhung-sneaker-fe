@@ -1,0 +1,79 @@
+.menu-status{
+  display: flex;
+  padding-bottom: 2%;
+}
+.status-item{
+  width: 120px;
+  border: 2px solid;
+  margin-right: 10px;
+  border-radius: 30px;
+  border: 1px solid #109D1A;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  background-color: transparent;
+  color: black;
+}
+
+.selected {
+  background-color: #109D1A;
+  color: antiquewhite;
+}
+
+ul{
+  width: 1200px;
+}
+
+.header-filter{
+  background-color: #cfe2ff;
+}
+input{
+  text-align: center;
+}
+
+td{
+  vertical-align: middle;
+}
+
+.accordion-button{
+  padding: 10px;
+}
+
+.title{
+  flex: 1;
+}
+
+.value{
+  flex: 10;
+}
+
+.input-qty{
+  min-width: 40px;
+}
+
+.input-qty input{
+  width: 100%;
+}
+
+.title-report{
+  flex: 10;
+}
+
+.menu-report{
+  flex: 1;
+}
+
+tbody{
+  overflow-y:auto;
+  }
+
+.table-responsive {
+    max-height:500px;
+}
+
+thead{
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}

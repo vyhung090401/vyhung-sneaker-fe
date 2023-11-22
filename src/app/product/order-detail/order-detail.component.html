@@ -1,0 +1,57 @@
+<div class="container">
+  <div>
+    <div class="status-item">
+      {{statusOrder}}
+    </div>
+
+    <div *ngFor="let item of orderDetail let  i = index" class="order-item row" >
+      <div class="col-2">
+          <img [src]="item.picByte?('data:image/png;base64,'+item.picByte|safeHtml):''" style="width: 100px; height: 100px;">
+      </div>
+      <div class="col-2">
+        <h2>{{item.product.name}}</h2>
+      </div>
+      <div class="col-2">
+        <h2>Size: {{item.productSize.sizeDTO.sizeNumber}}</h2>
+      </div>
+      <div class="col-2">
+        <h2>{{item.price | currency}}</h2>
+      </div>
+      <div class="col-2">
+        <h2>Quantity: {{item.quantity}}</h2>
+      </div>
+      <div class="col-2">
+        <h2>Total: {{item.totalPrice | currency}}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div style="border-right: 2px solid;">
+        <strong style="font-size: x-large;">Order Information</strong>
+      <div class="inf">
+        Name: {{order?.name}}
+      </div>
+      <div class="inf">
+        Adderss: {{order?.address}}
+      </div>
+      <div class="inf">
+        Email: {{order?.email}}
+      </div>
+      <div class="inf">
+        Order Date: {{order?.createDate | date:'longDate'}}
+      </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div>
+        <strong style="font-size: x-large;">Summary</strong>
+      <div class="inf">Subtotal: {{order?.orderTotal | currency}}</div>
+      <div class="inf">Ship Cost: Free</div>
+      <div class="inf">Total: {{order?.orderTotal | currency}}</div>
+      </div>
+    </div>
+</div>
+<div class="d-flex justify-content-end" style="margin: 10px 10px;" *ngIf="order?.status === 'PENDING'">
+  <button class="btn btn-danger" (click)="CancelOrder()">Cancel Order</button>
+</div>

@@ -1,0 +1,23 @@
+hr{
+  border: 2px solid #343a40;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.inf-checkout{
+  padding-bottom: 3%;
+}
+
+.btn{
+  border-radius: 10px;
+  background-color: #343a40;
+  width: 150px;
+}
+
+.col-md-5{
+  font-size: large;
+}
+
+
+
+

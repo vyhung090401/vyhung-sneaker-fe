@@ -1,0 +1,118 @@
+<h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">{{ data.message }}</h3>
+
+<div mat-dialog-content *ngIf="productForm">
+  <form [formGroup]="productForm" >
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Product's Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name" name="name">
+          <div *ngIf="productForm.get('name')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Name is required
+          </div>
+        </div>
+        <!-- Các trường dữ liệu khác tương tự -->
+
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Product's Price</label>
+          <input type="text" class="form-control" id="price" formControlName="price">
+          <div *ngIf="productForm.get('price')?.errors?.['required'] && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Price is required
+          </div>
+          <div *ngIf="productForm.get('price')?.errors?.['pattern'] && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Price is incorrect format
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Status</label>
+          <select class="form-select"
+                  id="status"
+                  formControlName="status">
+            <option value="Available">Available</option>
+            <option value="OutOfStock">Out Of Stock</option>
+            <option value="Unavailable">Unavailable</option>
+
+          </select>
+          <div *ngIf="productForm.get('status')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Status is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Product's Color</label>
+          <input type="text" class="form-control" id="color" formControlName="color">
+          <div *ngIf="productForm.get('color')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Color is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="not-null">*</span>
+          <label>Product's Brand</label>
+          <input type="text" class="form-control" id="brand" formControlName="brand">
+          <div *ngIf="productForm.get('brand')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+            Product's Brand is required
+          </div>
+        </div>
+
+      </div>
+      <div class="col-8">
+        <div class="form-group">
+            <span class="not-null">*</span>
+            <label class="pb-2">Product's Image</label>
+            <div class="row">
+              <div *ngFor="let image of imageProduct let i = index" class="col-2 img-container">
+                <span class="btn-remove-image" (click)="removeImageProduct(i)">x</span>
+                <img [src]="image.picByte?('data:image/png;base64,'+image.picByte|safeHtml):''" width="100px" height="100px">
+              </div>
+            </div>
+        </div>
+
+        <h2 >Selected Image</h2>
+        <div class="form-group">
+          <div class="row">
+            <div *ngFor="let image of imageSelect let i = index" class="col-2 img-container">
+              <span class="btn-remove-image" (click)="removeImageSelected(i)">x</span>
+              <img  src="assets/img/{{image.file.name}}" width="100px" height="100px" >
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="file" class="form-control"  multiple value="select" (change)="onFileSelected($event)">
+        </div>
+        <label class="pb-2">Product's Size</label>
+        <table>
+          <td>
+            <tr>
+              <label for="">Size</label>
+            </tr>
+            <tr>
+              <label for="">Quantity</label>
+            </tr>
+          </td>
+          <div formArrayName="productSize">
+            <td *ngFor="let s of productSize.controls;let i = index" >
+              <div [formGroupName]="i" >
+                <tr >
+                  <label style="width: 35px;">{{getSizeNumber(i)}}</label>
+                </tr>
+                <tr>
+                  <input type="text" formControlName="quantity" style="width: 35px;">
+                </tr>
+              </div>
+            </td>
+          </div>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-success"  mat-button (click)="onYesClick()">Confirm</button>
+  <button class="btn btn-secondary" mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+</div>

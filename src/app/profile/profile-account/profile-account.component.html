@@ -1,0 +1,147 @@
+<h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">Account Information</h3>
+<div class="row" style="margin-bottom: 20px;">
+  <div class="col-2">
+    <label>Username:</label>
+  </div>
+  <div class="col-10">
+    {{ currentUser.username }}
+  </div>
+</div>
+<form [formGroup]="accountForm">
+  <div class="row">
+    <div class="col-2">
+      <label>Gender:</label>
+    </div>
+    <div class="col-10">
+      <div class="form-group">
+        <select class="form-contro form-select" id="gender" formControlName="gender">
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <label>Date of Birth:</label>
+    </div>
+    <div class="col-10">
+      <div class="form-group">
+        <input
+          type="date"
+          class="form-control"
+          id="birthday"
+          formControlName="birthday"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <label>Address:</label>
+    </div>
+    <div class="col-10">
+      <div class="form-group">
+        <textarea
+          type="text"
+          class="form-control"
+          id="address"
+          formControlName="address"
+        ></textarea>
+        <div
+          *ngIf="
+            accountForm.get('address')?.invalid &&
+            isSubmitted
+          "
+          style="color: rgb(160, 0, 0)"
+        >
+          Address is required
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <label for="">City:</label>
+    </div>
+    <div class="col-10">
+      <div class="col-md-4">
+        <select class="form-select" [(ngModel)]="citySelected" (ngModelChange)="getDistrict($event)" [ngModelOptions]="{standalone: true}">
+          <option disabled [ngValue]="citySelected">{{citySelected.defaultValue}}</option>
+          <option [selected]="citySelected.name===city.name" *ngFor="let city of cities" [ngValue]="city" >
+            {{city.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <label for="">District:</label>
+    </div>
+    <div class="col-10">
+      <div class="col-md-4">
+        <select class="form-select" [(ngModel)]="districtSelected" (ngModelChange)="getWard($event)" [ngModelOptions]="{standalone: true}">
+          <option disabled [ngValue]="districtSelected">{{districtSelected.defaultValue}}</option>
+          <option [selected]="districtSelected.name===district.name" *ngFor="let district of districts" [ngValue]="district">
+            {{district.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <label for="">Ward:</label>
+    </div>
+    <div class="col-10">
+      <div class="col-md-4">
+        <select class="form-select" [(ngModel)]="wardSelected" [ngModelOptions]="{standalone: true}">
+          <option disabled [ngValue]="wardSelected">{{wardSelected.defaultValue}}</option>
+          <option [selected]="wardSelected.name===ward.name" *ngFor="let ward of wards" [ngValue]="ward">
+            {{ward.name}}
+          </option>
+        </select>
+    </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="row">
+    <div class="col-2">
+      <label>Phone Number:</label>
+    </div>
+    <div class="col-10">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          formControlName="phone"
+        />
+        <div
+          *ngIf="
+          phone?.errors?.['required'] &&
+          isSubmitted
+          "
+          style="color: rgb(160, 0, 0)"
+        >
+          Phone Number is required
+        </div>
+        <div
+        *ngIf="
+          phone?.errors?.['pattern'] &&
+          isSubmitted
+        "
+        style="color: rgb(160, 0, 0)"
+      >
+        Phone Number is incorrect format
+      </div>
+      </div>
+      <button style="margin-top: 20px;" class="btn btn-primary"  (click)="Save()">Confirm</button>
+    </div>
+  </div>
+</form>

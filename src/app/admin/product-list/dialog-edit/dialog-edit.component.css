@@ -1,0 +1,51 @@
+/* .btn-remove-image{
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: auto;
+  text-align: center;
+} */
+.img-container {
+  position: relative;
+}
+
+.img-container img {
+  display: block;
+}
+
+.btn-remove-image {
+  position: absolute;
+  top: -8%;
+  right: 0;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+label{
+  font-weight: 600;
+  color: black;
+}
+
+.form-group{
+  padding-bottom: 20px;
+}
+.btn{
+  padding-right: 10px;
+}
+
+.btn-success{
+  margin-right: 10px;
+}
+.not-null {
+  /* position: absolute; */
+  /* top: 135px;
+  right: -350px; */
+  color: #ed1846;
+  font-size: 20px;
+  z-index: 1;
+}

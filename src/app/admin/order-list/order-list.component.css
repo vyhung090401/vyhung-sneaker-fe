@@ -1,0 +1,46 @@
+.menu-status{
+  display: flex;
+  padding-bottom: 2%;
+}
+.status-item{
+  width: 120px;
+  border: 2px solid;
+  margin-right: 10px;
+  border-radius: 30px;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  background-color: #212529;
+  color: white;
+}
+
+.selected {
+  background-color: #109D1A;
+  color: antiquewhite;
+}
+
+.search-icon {
+  position: absolute;
+  top: 184px;
+  left: 28vw;
+}
+
+td {
+  /* width: fit-content; */
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* tr{
+  width: fit-content;
+} */
+/* Bảng chứa danh sách sản phẩm */
+table {
+  table-layout: fixed;
+}
+
+
+th {
+  text-align: center;
+}

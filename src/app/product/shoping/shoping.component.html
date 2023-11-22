@@ -1,0 +1,61 @@
+
+<div class="container">
+  <div class="banner sticky">
+    <img src="assets/img/bannerside.jpg" alt="" >
+  </div>
+<div class="row">
+  <label style="font-size: xx-large; padding-bottom: 20px; font-weight: 500;">Sneaker ({{totalProducts}})</label>
+  <div class="col-2 col-xs-12">
+    <div class="filter">
+      <strong style="font-size: large">Brand</strong>
+    </div>
+    <div>
+      <ul style="padding-left: 0%;">
+        <li *ngFor="let i of brandList" class="item">
+          <label>
+            <input type="checkbox" [ngModel]="selectedBrand.includes(i)"  value="{{i}}"  (click)="FilterByBrand($event)">
+            {{i}}
+          </label>
+        </li>
+      </ul>
+    </div>
+    <div class="filter">
+      <strong style="font-size: large">Price Range</strong>
+    </div>
+    <div>
+      <ul style="padding-left: 0%;">
+        <li *ngFor="let i of rangePrices" class="item">
+          <label>
+            <input type="checkbox" value={{i.value}} (click)="FilterByPrice($event)">
+            {{i.name}}
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-10">
+
+    <div class="row">
+      <td *ngFor="let product of products" class="col-xl-4 col-lg-4 col-md-6 col-xs-12">
+        <app-product-item *ngIf="product" [product]="product"></app-product-item>
+      </td>
+    </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [ngClass]="currentPage === 0 ? 'disabled' : 'page-item'">
+        <a  class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage - 1)">Previous</a>
+      </li>
+
+      <li *ngFor="let pageNumber of [].constructor(totalPages) ; let i = index;  " class="page-item" [ngClass]="currentPage === i ? 'disabled' : 'page-item'"  >
+        <a (click)="goToPage(i)" class="page-link" href="javascript:void(0)" >{{ i + 1 }}</a>
+      </li>
+
+      <li class="page-item" [ngClass]="currentPage === totalPages-1 ? 'disabled' : 'page-item'">
+        <a class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage + 1)" >Next</a>
+      </li>
+    </ul>
+  </nav>
+  </div>
+</div>
+</div>

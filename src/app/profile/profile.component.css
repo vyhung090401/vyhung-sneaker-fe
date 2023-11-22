@@ -1,0 +1,48 @@
+.form-group{
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  background-color: rgb(240, 240, 240);
+  padding: 10px;
+  margin-top: 20px;
+  width: 800px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.menu{
+  margin-top: 20px;
+  background-color: rgb(240, 240, 240);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.menu-item{
+  padding: 20px;
+  display: block;
+  color: black
+}
+
+.menu-item.active{
+  color: red;
+}
+.menu-item.active svg path{
+  fill: red;
+}
+.user{
+  border-bottom: 1px solid;
+  padding: 10px;
+}
+
+.menu-item:hover{
+  color: red;
+}
+
+.menu-item:hover svg path{
+  fill: red;
+}
+
+
+a {
+  text-decoration: none;
+}

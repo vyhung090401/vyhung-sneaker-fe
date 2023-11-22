@@ -1,0 +1,76 @@
+<div class="container">
+
+  <div class="row" >
+    <div class="col-md-8 ">
+      <div class="img-product">
+        <div class="list-img">
+          <div *ngFor="let image of imageList let i = index" class="item-img">
+            <img style="padding-bottom: 10px;" (mouseover)="onMouseOver(image.picByte)" [src]="image.picByte?('data:image/png;base64,'+image.picByte|safeHtml):''" width="70px" height="70px">
+          </div>
+        </div>
+        <img [src]="'data:image/png;base64,'+currentImage|safeHtml" width="500px" height="500px">
+      </div>
+    </div>
+
+    <div class="col-md-4">
+
+      <form #productForm="ngForm" >
+
+        <div class="form-group">
+          <label style="font-size: x-large; font-weight: 700;">Product Name: {{product?product.name:''}}</label>
+        </div>
+
+        <div class="form-group">
+          <label style="font-size: large;">Price: ${{product?product.price:''}}</label>
+        </div>
+
+        <!-- <div class="form-group">
+          <label>Description:</label>
+          <textarea class="form-control" name="description" [(ngModel)]="product.description"></textarea>
+        </div> -->
+
+        <div class="form-group">
+          <label style="font-size: large;">Color: {{product?product.color:''}}</label>
+        </div>
+
+        <div class="form-group">
+          <label style="font-size: large;">Brand: {{product?product.brand:''}}</label>
+        </div>
+
+
+        <div class="form-group">
+          <label style="font-size: large;">Size:</label>
+          <div class="product-size">
+            <div *ngFor="let ps of productSize" class="size-item" [ngClass]="{'disabled': ps.quantity === 0}" [class.selected]="ps.sizeDTO.sizeNumber === selectedProductsize.sizeDTO.sizeNumber" (click)="selectedProductsize = ps">
+              {{ps.sizeDTO.sizeNumber}}
+            </div>
+          </div>
+        </div>
+
+
+        <!-- more fields -->
+
+        <!-- <button type="button" *ngIf="product?.amount===0"
+          style="background-color: rgb(160, 0, 0);"
+          class="btn btn-danger btn-block"
+          disabled>
+          SOLD OUT!
+        </button> -->
+
+
+
+        <button
+          class="btn btn-block"
+          [class.soldout]="isSoldOut"
+          type="submit"
+          [disabled]="isSoldOut"
+          (click)="addToCart(selectedProductsize.id)">
+          {{isSoldOut?'Sold Out':'Add to Bag'}}
+        </button>
+
+
+      </form>
+
+    </div>
+  </div>
+</div>

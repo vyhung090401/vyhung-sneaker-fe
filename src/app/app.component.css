@@ -1,0 +1,111 @@
+.page-link.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6; /* Có thể tùy chỉnh độ mờ tùy ý */
+}
+
+.count-item-cart{
+  position: absolute;
+  top: 60%;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  color: rgb(255, 255, 255);
+}
+
+.img-cart{
+  position: absolute;
+}
+
+.cart-link{
+  position: relative;
+  display: block;
+}
+
+
+
+.search-result{
+  padding: 20px;
+  height: 500px;
+  overflow-y: scroll;
+  display: flex;
+}
+
+ .dropdown-search{
+   width: 100%;
+}
+
+.menu1{
+  height: 100%;
+}
+
+.search-result .product-item:hover{
+  /* transform: scale(1.1); */
+  transition: 0.4s;
+}
+
+.search .progress{
+  height: 10px;
+}
+
+.search{
+  /* top: 10;
+  left: 0; */
+  transition:all .2s linear;
+  z-index: 99;
+}
+
+.after-search{
+  flex-direction: column;
+  background: #e5e5e5;
+  position: absolute;
+  z-index: 99;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.product-item{
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none ;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  padding-top: 2%;
+}
+
+footer {
+  margin-top: auto;
+  position: absolute;
+  width: 100%;
+}
+
+.px-0{
+  color: white;
+}
+.px-0.active{
+  color: rgb(227, 243, 0);
+  background-color: #212529;
+}
+
+.nav-item{
+  padding-left: 5px;
+}
+
+.title{
+  padding-left: 5px;
+}
+
+

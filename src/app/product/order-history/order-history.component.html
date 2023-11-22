@@ -1,0 +1,25 @@
+<h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">HISTORY ORDER</h3>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Create Date</th>
+      <th>Status</th>
+      <th>Order Total</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders ">
+      <td> {{order.id}} </td>
+      <td> {{order.name}} </td>
+      <td> {{order.createDate| date}} </td>
+      <td> {{order.status}} </td>
+      <td> {{order.orderTotal| currency}} </td>
+      <td>
+        <button class="btn btn-primary" (click)="goToOrderDetail(order.id)">Order Detail</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

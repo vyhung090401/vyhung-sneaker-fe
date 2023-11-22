@@ -1,0 +1,15 @@
+td {
+  width: 1%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Bảng chứa danh sách sản phẩm */
+table {
+  table-layout: fixed;
+}
+
+
+th {
+  text-align: center;
+}

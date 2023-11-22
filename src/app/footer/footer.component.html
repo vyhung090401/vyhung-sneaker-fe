@@ -1,0 +1,100 @@
+<!-- Footer -->
+<footer class="bg-dark text-white">
+  <!-- Grid container -->
+  <div class="container p-4 ">
+    <!-- Section: Text -->
+    <section class="mb-4 text-center">
+      <p>
+        Get connected with us on social networks:
+      </p>
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/hung.vy.10690" target="_blank" role="button"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/vyhung941/" target="_blank" role="button"
+        ><i class="fab fa-instagram"></i
+      ></a>
+    </section>
+    <!-- Section: Text -->
+    <!-- Section: Social media -->
+
+
+
+
+    <!-- Section: Links -->
+    <section>
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-4 col-md-12">
+          <div>
+            <h3 class="text-uppercase fw-bold">CONTACT US</h3>
+          </div>
+          <div>
+            <div class="mt-2 ">
+              <a href="mailto:vyhung090401@gmail.com">
+                <i class="fa fa-envelope-o"></i>
+                Email: vyhung090401@gmail.com
+              </a>
+            </div>
+            <div class="mt-2">
+              <a href="tel:+84766629362">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                Hotline: +84766629362
+              </a>
+            </div>
+            <div class="mt-2">
+              <a routerLink="contact">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                Address: 46 Bạch Đằng, Phường 2, Quận Tân Bình, Thành phố Hồ Chí Minh
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Products</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li *ngFor="let b of brandList" class="mt-2 ">
+              <a [routerLink]="['/shopping']" [queryParams]="{filter: b}" class="text-white">{{b}}</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+        <div class="col-lg-5 col-md-12">
+          <div>
+            <h3 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>Company name
+            </h3>
+          </div>
+          <div>
+            <div class="mt-2 ">
+              <a href="mailto:vyhung090401@gmail.com">
+                <i class="fa fa-envelope-o"></i>
+                Email: vyhung090401@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+
+    </section>
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2023 Copyright:
+    <a>VyHung Inc. All Rights Reserved</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->

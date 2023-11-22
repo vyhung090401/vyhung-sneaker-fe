@@ -1,0 +1,77 @@
+<div class="container">
+  <h3 style="text-align: center; font-size: xx-large; font-weight: 500;padding-top: 10px;">
+    DASHBOARD
+  </h3>
+  <div class="category">
+    <div class="item" [class.selected]="category[0] === selectedCategory" (click)="getChartByCategory(category[0])">
+      <div class="content">
+        <span>Products</span>
+        <span>{{totalProduct}}</span>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#c7c7c7" d="M2 15s0-3 2-3c.68 0 1.46-.05 2.28-.18C7.2 12.54 8.5 13 10 13h.25l-1.69-1.71c.35-.11.69-.24 1.03-.38l1.91 1.91c.39-.08.75-.19 1.08-.32l-2.03-2.05c.3-.17.59-.34.88-.54L13.5 12c.3-.21.54-.44.75-.68l-2.03-2.03c.24-.22.48-.46.7-.71l1.87 1.87c.12-.31.21-.62.21-.95c0-.85-.45-1.61-1.16-2.22c.05-.09.11-.18.16-.28l1.53-.77c.85.94 2.61 1.61 4.72 1.74l.05.03h.7s1 1 1 4.5c0 .57 0 1.07-.04 1.5H19c-1.1 0-2.42.26-3.7.5c-1.18.26-2.4.5-3.3.5H2m19 2s.58 0 .86-2H19c-2 0-5 1-7 1H2.28c.34.6.98 1 1.72 1h17Z"/></svg>
+    </div>
+    <div class="item" [class.selected]="category[1] === selectedCategory" (click)="getChartByCategory(category[1])">
+      <div class="content">
+        <span>Toal Sales</span>
+        <span>{{totalSale | currency}}</span>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#c7c7c7" d="m6 16.5l-3 2.94V11h3m5 3.66l-1.57-1.34L8 14.64V7h3m5 6l-3 3V3h3m2.81 9.81L17 11h5v5l-1.79-1.79L13 21.36l-3.47-3.02L5.75 22H3l6.47-6.34L13 18.64"/></svg>
+    </div>
+    <div class="item" [class.selected]="category[2] === selectedCategory" (click)="getChartByCategory(category[2])">
+      <div class="content">
+        <span>Orders</span>
+        <span>{{totalOrder}}</span>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#c7c7c7" d="M10.18 17H7v-2h3c.08-.68.23-1.36.5-2H7v-2h4.82c.03-.03.05-.06.08-.1A6.53 6.53 0 0 1 16.5 9H7V7h10v2h-.5c1.62 0 3.24.61 4.5 1.82V5a2 2 0 0 0-2-2h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h8.06c-.41-.26-.8-.55-1.16-.9c-.9-.89-1.45-1.97-1.72-3.1M12 3c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1m8.31 14.9c.44-.69.69-1.52.69-2.4c0-2.5-2-4.5-4.5-4.5S12 13 12 15.5s2 4.5 4.5 4.5c.87 0 1.69-.25 2.38-.68L22 22.39L23.39 21l-3.08-3.1m-3.81.1a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5Z"/></svg>
+    </div>
+    <div class="item" [class.selected]="category[3] === selectedCategory" (click)="getChartByCategory(category[3])">
+      <div class="content">
+        <span>Accounts</span>
+        <span>{{totalAccount}}</span>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#c7c7c7" d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4Z"/></svg>
+    </div>
+  </div>
+  <div class="date-picker" style="margin: 20px 0; width: 200px;">
+    <div>Datepicker</div>
+    <input type="text"
+           placeholder="Datepicker"
+           class="form-control"
+           bsDatepicker
+           [bsConfig]="{dateInputFormat: 'MM/YYYY'}"
+           [(ngModel)]="myDateValue"
+           (ngModelChange)="getDate($event)"
+           (onShown)="onOpenCalendar($event)">
+           <!-- <span class="icon-calendar">
+            <i class="fa fa-caret-down fa-2x " ></i>
+           </span> -->
+  </div>
+  <div class="chart-container">
+    <div *ngIf="loadedSalesChart">
+      <h1>Total Sales Of Month: {{totalSaleOfMonth|currency}}</h1>
+    </div>
+    <canvas id="chart"
+            *ngIf="loadedSalesChart"
+            maintainAspectRatio="false"
+            baseChart type="line"
+            [data]="lineChartData"
+            [options]="lineChartDataOption"
+            >
+    </canvas>
+    <canvas id="chart"
+            *ngIf="loadedBarChart"
+            maintainAspectRatio="false"
+            baseChart type="bar"
+            [data]="barChartData"
+            [options]="barChartDataOption"
+            (chartClick)="openDialogProductChart($event)">
+    </canvas>
+    <canvas id="chart"
+            *ngIf="loadedPieChart"
+            maintainAspectRatio="false"
+            baseChart type="pie"
+            [data]="pieChartData"
+            [options]="pieDataOption">
+    </canvas>
+  </div>
+</div>

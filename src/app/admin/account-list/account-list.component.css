@@ -1,0 +1,25 @@
+.status.active > svg > circle{
+  fill: #109D1A ;
+}
+.status.inactive > svg > circle{
+  fill: #3a3a3a ;
+}
+
+td {
+  width: fit-content;
+  white-space: nowrap;
+  text-align: center;
+}
+
+tr{
+  width: fit-content;
+}
+/* Bảng chứa danh sách sản phẩm */
+table {
+  table-layout: fixed;
+}
+
+
+th {
+  text-align: center;
+}

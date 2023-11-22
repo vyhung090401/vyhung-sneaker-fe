@@ -1,0 +1,55 @@
+.item{
+  border-radius: 10px;
+  display: flex;
+  border: 2px solid;
+  width: 250px;
+  height: 100px;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #212529;
+  color: white;
+  cursor: pointer;
+}
+.category{
+  display: flex;
+  justify-content: space-between;
+}
+
+.item ~ .item {
+  margin-left: 10px;
+}
+
+.content{
+  display: grid;
+}
+
+.selected {
+  background-color: #109D1A;
+  color: antiquewhite;
+}
+
+/* .chart-container {
+  position: relative;
+  margin: auto;
+  height: calc(100vh - 250px);
+  width: 80vw;
+} */
+
+.date-picker{
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.icon-calendar{
+  position: absolute;
+  right: 0px;
+  padding-right: 10px;
+}
+
+.chart-container{
+  height: 60vh;
+  width: 80vw;
+}
+

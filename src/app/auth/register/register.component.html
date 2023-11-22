@@ -1,0 +1,104 @@
+
+  <div class="register">
+    <form form [formGroup]="registerForm" >
+    <h1>Sign up</h1>
+      <div class="form-group">
+        <span class="not-null">*</span>
+        <input type="text" class="form-control" id="username" formControlName="username" name="username" placeholder="Username">
+          <div *ngIf="registerForm.get('username')?.errors?.['required'] && isSubmit" style="color: brown;">
+            Please enter your Username!
+          </div>
+          <div *ngIf="registerForm.get('username')?.errors?.['pattern'] && isSubmit" style="color: rgb(160, 0, 0);">
+            Username doesn't contains space!
+          </div>
+      </div>
+      <div class="form-group">
+        <span class="not-null">*</span>
+        <input type="text" class="form-control" id="password" formControlName="password" name="password" placeholder="Password">
+          <div *ngIf="registerForm.get('password')?.invalid && isSubmit" style="color: brown;">
+            Please enter your Password!
+          </div>
+      </div>
+      <div class="form-group">
+        <span class="not-null">*</span>
+        <input type="text" class="form-control" id="phone" formControlName="phone" name="phone" placeholder="Phone Number">
+          <div *ngIf="registerForm.get('phone')?.invalid && isSubmit" style="color: brown;">
+            Please enter your Phone Number!
+          </div>
+      </div>
+      <div class="form-group">
+        <span class="not-null">*</span>
+        <select class="form-select" id="gender" formControlName="gender" name="gender">
+          <option value="" disabled selected>Gender</option>
+          <option value="MALE" selected>Male</option>
+          <option value="FEMALE" selected>Female</option>
+          <option value="OTHER" selected>Other</option>
+        </select>
+          <div *ngIf="registerForm.get('gender')?.invalid && isSubmit" style="color: brown;">
+            Please enter your Gender!
+          </div>
+      </div>
+      <div class="form-group">
+        <span class="not-null">*</span>
+        <input type="date" class="form-control" id="birthday" formControlName="birthday" name="birthday" placeholder="Phone Number">
+          <div *ngIf="registerForm.get('birthday')?.invalid && isSubmit" style="color: brown;">
+            Please enter your Date of Birth!
+          </div>
+      </div>
+      <div class="form-group">
+        <span class="not-null">*</span>
+        <input type="text" class="form-control" id="address" formControlName="address" name="address" placeholder="Address">
+          <div *ngIf="registerForm.get('address')?.invalid && isSubmit" style="color: brown;">
+            Please enter your Address!
+          </div>
+      </div>
+
+      <div class=" form-group" >
+        <span class="not-null">*</span>
+          <select class="form-select " [(ngModel)]="citySelected" (ngModelChange)="getDistrict($event)" id="city" formControlName="city" name="city">
+            <option disabled [ngValue]="citySelected">{{citySelected.defaultValue}}</option>
+            <option [selected]="citySelected.name===city.name" *ngFor="let city of cities" [ngValue]="city" >
+              {{city.name}}
+            </option>
+          </select>
+          <div *ngIf="registerForm.get('city')?.invalid && isSubmit" style="color: brown;">
+            Please enter your City!
+          </div>
+      </div>
+      <div class="form-group">
+        <span class="not-null">*</span>
+          <select class="form-select " [(ngModel)]="districtSelected" (ngModelChange)="getWard($event)" id="district" formControlName="district" name="district">
+            <option disabled [ngValue]="districtSelected">{{districtSelected.defaultValue}}</option>
+            <option [selected]="districtSelected.name===district.name" *ngFor="let district of districts" [ngValue]="district">
+              {{district.name}}
+            </option>
+          </select>
+          <div *ngIf="registerForm.get('district')?.invalid && isSubmit" style="color: brown;">
+            Please enter your District!
+          </div>
+      </div>
+      <div class="form-group">
+        <span class="not-null">*</span>
+          <select class="form-select " [(ngModel)]="wardSelected" id="ward" formControlName="ward" name="ward">
+            <option disabled [ngValue]="wardSelected">{{wardSelected.defaultValue}}</option>
+            <option [selected]="wardSelected.name===ward.name" *ngFor="let ward of wards" [ngValue]="ward">
+              {{ward.name}}
+            </option>
+          </select>
+          <div *ngIf="registerForm.get('ward')?.invalid && isSubmit" style="color: brown;">
+            Please enter your Ward!
+          </div>
+      </div>
+      <div class="form-group">
+        <button (click)="onSubmit()" class="btn btn-primary btn-block">Sign Up</button>
+      </div>
+
+      <!-- <div class="alert alert-warning">
+        Signup failed!<br />{{ errorMessage }}
+      </div> -->
+    </form>
+
+    <!-- <div class="alert alert-success" *ngIf="isSuccessful">
+      Your registration is successful!
+    </div> -->
+  </div>

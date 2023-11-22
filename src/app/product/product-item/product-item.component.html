@@ -1,0 +1,11 @@
+<div class="card-item">
+  <div class="card">
+    <img (click)="showProductDetail(product.id)" class="card-img-top" [src]="url?('data:image/png;base64,'+url|safeHtml):''"  alt="Card image cap"  >
+    <a (click)="showProductDetail(product.id)" class="btn">View Product Detail</a>
+  </div>
+  <div class="card-body" >
+    <h5 class="card-title" style="font-size: large;">{{product.name}}</h5>
+    <p class="card-text">Brand: {{product.brand}}</p>
+    <p class="card-text">${{product.price}}</p>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+.card img:hover{
+  transform: scale(1.1);
+  transition: 0.4s;
+}
+.card img{
+  cursor: pointer;
+}
+
+
+.btn{
+  position: absolute;
+  z-index: 97;
+  opacity: 0;
+  width: 100%;
+  bottom: 0;
+  background-color: #343a40;
+  color: aliceblue;
+
+}
+
+.card-img-top{
+  z-index: 98;
+}
+
+.card{
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover .btn{
+  z-index: 99;
+  transition: all .4s linear;
+  opacity: 1;
+}
+
+.card-body{
+  padding-top: 10px;
+  font-size: larger;
+}
+
+
+

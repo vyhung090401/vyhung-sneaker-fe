@@ -1,0 +1,63 @@
+<h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">ACCOUNT LIST</h3>
+<div class="d-flex align-items-center">
+  <app-search (searchTextChanged)="onSearchTextEntered($event) " class="mr-3"></app-search>
+</div>
+<table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Active</th>
+      <th>Status</th>
+      <th>Role</th>
+      <th>Action</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of accounts">
+      <td> {{account.id}} </td>
+      <td> {{account.username}} </td>
+      <td>
+        <div class="status" [ngClass]="account.active?'active':'inactive'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+        </div>
+
+
+      </td>
+      <td *ngIf="account.notLocked === false" >
+        <div style="border-radius: 30px; background-color: #db091e; padding: 10px;">BANNED</div>
+      </td>
+      <td *ngIf="account.notLocked === true">
+        <div style="border-radius: 30px; background-color: #109D1A; padding: 10px;color: white;">ACTIVATED</div>
+      </td>
+      <td> {{account.roles[0].name}} </td>
+
+      <td>
+        <button *ngIf="account.notLocked===true" (click)="banAccount(account.id!)" class="btn btn-danger">Ban</button>
+        <button *ngIf="account.notLocked===false" (click)="unbanAccount(account.id!)" class="btn btn-success">Unban</button>
+      </td>
+      <!-- <td>
+        <button class="btn btn-info" (click)="openDialog(account.id!)">Account Detail</button>
+      </td> -->
+    </tr>
+  </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="currentPage === 0 ? 'disabled' : 'page-item'">
+      <a  class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage - 1)">Previous</a>
+    </li>
+
+    <li *ngFor="let pageNumber of [].constructor(totalPages); let i = index" class="page-item">
+      <a (click)="goToPage(i)" class="page-link" href="javascript:void(0)" >{{ i + 1 }}</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage + 1)" [class.disabled]="currentPage === totalPages - 1">Next</a>
+    </li>
+  </ul>
+</nav>
+

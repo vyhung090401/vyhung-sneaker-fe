@@ -1,0 +1,11 @@
+input,select,textarea{
+  width: 500px;
+}
+label{
+  font-weight: 600;
+}
+.row{
+  margin-bottom: 20px;
+}
+
+

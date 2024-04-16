@@ -1,5 +1,7 @@
-.field{
+.field {
   padding-bottom: 5%;
 }
 
-
+.notification {
+  color: #DC3545;
+}

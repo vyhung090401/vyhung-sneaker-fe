@@ -1,43 +1,175 @@
-<h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">ACCOUNT LIST</h3>
+<h3
+  style="
+    text-align: center;
+    font-size: xx-large;
+    font-weight: 500;
+    padding-top: 3%;
+  "
+>
+  ACCOUNT LIST
+</h3>
+<div class="filter">
+  <div class="row">
+    <div class="col-2 fw-bold">Inventory</div>
+    <div class="col-2 fw-bold">Product</div>
+    <div class="col-2 fw-bold">Color</div>
+    <div class="col-2 fw-bold">Brand</div>
+    <div class="col-2 fw-bold">Status</div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <select class="form-select" name="" id=""></select>
+    </div>
+    <div class="col">
+      <input class="form-control" type="text" placeholder="Enter value..." />
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <div
+          class="form-select"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <div>
+            <span>Select Color</span>
+          </div>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="dropdown-item"><input type="checkbox" /></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <div
+          class="form-select"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <div>
+            <span>Select Brand</span>
+            <span></span>
+          </div>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="dropdown-item"><input type="checkbox" /></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <div
+          class="form-select"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <div>
+            <span>Select Status</span>
+          </div>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1"></ul>
+      </div>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary">
+        <i class="fa fa-filter"></i>
+        Filter
+      </button>
+    </div>
+  </div>
+  <div class="row line-2">
+    <div class="col-2 fw-bold">Min Price</div>
+    <div class="col-2 fw-bold">Max Price</div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <input type="text" class="form-control" placeholder="Enter Min Price" />
+    </div>
+    <div class="col-2">
+      <input type="text" class="form-control" placeholder="Enter Max Price" />
+    </div>
+  </div>
+</div>
 <div class="d-flex align-items-center">
-  <app-search (searchTextChanged)="onSearchTextEntered($event) " class="mr-3"></app-search>
+  <app-search
+    (searchTextChanged)="onSearchTextEntered($event)"
+    class="mr-3"
+  ></app-search>
 </div>
 <table class="table table-striped">
-
   <thead>
     <tr>
       <th>ID</th>
       <th>Username</th>
-      <th>Active</th>
+      <th>Online/Offline</th>
       <th>Status</th>
       <th>Role</th>
       <th>Action</th>
-
-
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let account of accounts">
-      <td> {{account.id}} </td>
-      <td> {{account.username}} </td>
+      <td>{{ account.id }}</td>
+      <td>{{ account.username }}</td>
       <td>
-        <div class="status" [ngClass]="account.active?'active':'inactive'">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>
+        <div class="status" [ngClass]="account.active ? 'active' : 'inactive'">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            viewBox="0 0 16 16"
+          >
+            <circle cx="8" cy="8" r="8" />
+          </svg>
         </div>
-
-
       </td>
-      <td *ngIf="account.notLocked === false" >
-        <div style="border-radius: 30px; background-color: #db091e; padding: 10px;">BANNED</div>
+      <td *ngIf="account.notLocked === false">
+        <div
+          style="
+            border-radius: 30px;
+            background-color: #db091e;
+            padding: 10px;
+            color: white;
+          "
+        >
+          BANNED
+        </div>
       </td>
       <td *ngIf="account.notLocked === true">
-        <div style="border-radius: 30px; background-color: #109D1A; padding: 10px;color: white;">ACTIVATED</div>
+        <div
+          style="
+            border-radius: 30px;
+            background-color: #109d1a;
+            padding: 10px;
+            color: white;
+          "
+        >
+          ACTIVE
+        </div>
       </td>
-      <td> {{account.roles[0].name}} </td>
+      <td>{{ account.roles[0].name }}</td>
 
       <td>
-        <button *ngIf="account.notLocked===true" (click)="banAccount(account.id!)" class="btn btn-danger">Ban</button>
-        <button *ngIf="account.notLocked===false" (click)="unbanAccount(account.id!)" class="btn btn-success">Unban</button>
+        <button
+          *ngIf="account.notLocked === true"
+          (click)="banAccount(account.id!)"
+          class="btn btn-danger"
+        >
+          Ban
+        </button>
+        <button
+          *ngIf="account.notLocked === false"
+          (click)="unbanAccount(account.id!)"
+          class="btn btn-success"
+        >
+          Unban
+        </button>
       </td>
       <!-- <td>
         <button class="btn btn-info" (click)="openDialog(account.id!)">Account Detail</button>
@@ -45,19 +177,10 @@
     </tr>
   </tbody>
 </table>
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item" [ngClass]="currentPage === 0 ? 'disabled' : 'page-item'">
-      <a  class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage - 1)">Previous</a>
-    </li>
-
-    <li *ngFor="let pageNumber of [].constructor(totalPages); let i = index" class="page-item">
-      <a (click)="goToPage(i)" class="page-link" href="javascript:void(0)" >{{ i + 1 }}</a>
-    </li>
-
-    <li class="page-item">
-      <a class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage + 1)" [class.disabled]="currentPage === totalPages - 1">Next</a>
-    </li>
-  </ul>
-</nav>
-
+<app-pagination
+  *ngIf="loadedPagination"
+  [currentPage]="currentPage"
+  [pageSize]="pageSize"
+  [totalPages]="totalPages"
+  (goTo)="goToPage($event)"
+></app-pagination>

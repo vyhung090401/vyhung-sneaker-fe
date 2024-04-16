@@ -2,8 +2,7 @@
 
 <div mat-dialog-content>
   <form [formGroup]="productForm">
-    <div class="row">
-      <div class="col-4">
+      <div>
         <div class="form-group">
           <span class="not-null">*</span>
           <label>Product's Name</label>
@@ -47,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="col-8 border-start ">
+      <div class="">
         <div class="form-group">
             <span class="not-null">*</span>
             <label class="pb-2">Product's Image</label>
@@ -67,92 +66,24 @@
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <span class="not-null">*</span>
-          <label class="pb-2">Opening Stock</label>
-          <div class="row">
-            <table>
-              <td>
-                <tr>
-                  <label for="">Size</label>
-                </tr>
-                <tr>
-                  <label for="">Quantity</label>
-                </tr>
-              </td>
-              <div *ngIf="isLoaded" formArrayName="productSize">
-                <td *ngFor="let s of productSize.controls;let i = index" >
-                  <div [formGroupName]="i">
-                    <tr>
-                      <label style="width: 35px;">{{getSizeNumber(i)}}</label>
-                    </tr>
-                    <tr>
-                      <input type="text" formControlName="quantity" style="width: 35px;">
-                    </tr>
-                  </div>
-                </td>
-              </div>
-            </table>
-          </div>
-        </div>
         <form [formGroup]="goodsReceiptForm">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>
-                  <span class="not-null">*</span>
-                  <label>Supplier</label>
-                </th>
-                <th>
-                  <span class="not-null">*</span>
-                  <label>Cost Price</label>
-                </th>
-                <th>
-                  <span class="not-null">*</span>
-                  <label>Selling Price</label>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="form-group">
-                    <select class="form-control form-select"
-                            id="inventoryName"
-                            formControlName="inventoryName">
-                      <option *ngFor="let i of inventoryList" [value]="i.name">{{i.name}}</option>
-                    </select>
-                    <div *ngIf="goodsReceiptForm.get('inventoryName')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
-                      Supplier is required
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="purchasePrice" formControlName="purchasePrice" name="purchasePrice">
-                    <div *ngIf="goodsReceiptForm.get('purchasePrice')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
-                      Cost Price is required
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="retailPrice" formControlName="retailPrice" name="retailPrice">
-                    <div *ngIf="goodsReceiptForm.get('retailPrice')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
-                      Selling Price is required
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            <span class="not-null">*</span>
+            <label>Inventory</label>
+            <div class="form-group">
+              <select class="form-control form-select" id="inventoryName" formControlName="inventoryName">
+                <option value="" disabled [selected]="defaultInventory">Choose Inventory</option>
+                <option *ngFor="let i of inventoryList" [value]="i.name">{{i.name}}</option>
+              </select>
+              <div *ngIf="goodsReceiptForm.get('inventoryName')?.invalid && isSubmitted" style="color: rgb(160, 0, 0);">
+                Supplier is required
+              </div>
+            </div>
         </form>
       </div>
-    </div>
   </form>
 </div>
 <div mat-dialog-actions>
-  <button class="btn btn-secondary" (click)="onYesClick()" style="margin-right: 10px;">Confirm</button>
-  <button class="btn btn-success" mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+  <button class="btn btn-success " [mat-dialog-close]="isClosed" (click)="onYesClick()" style="margin-right: 10px;">Confirm</button>
+  <button class="btn btn-secondary" mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
 </div>
 

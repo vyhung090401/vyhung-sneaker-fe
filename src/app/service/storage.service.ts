@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserInfo } from '../model/account';
 import { CartInfo } from '../model/cart';
+import { ProductInfo } from '../model/product';
 
 
 const TOKEN_KEY = 'auth-token';
@@ -13,6 +14,7 @@ const USER_KEY = 'auth-user';
 export class StorageService {
   userChange = new BehaviorSubject<UserInfo>({});
   cartChange = new BehaviorSubject<CartInfo[]>([]);
+  productChange = new BehaviorSubject<ProductInfo[]>([]);
 
   constructor(private router: Router) { }
 

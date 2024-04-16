@@ -20,3 +20,7 @@ export interface Product {
 //   link?: string;
 //   productId?: number;
 // }
+
+export interface ProductInfo{
+  id?: number;
+}

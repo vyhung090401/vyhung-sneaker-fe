@@ -1,27 +1,33 @@
-.register{
-  width: 400px;
-  border: 1px solid;
-  text-align: center;
-  padding: 2%;
-  border-radius: 20px;
-  margin: 20px auto 20px auto;
-  background-color: rgb(224, 224, 224);
+.register {
+  width           : 400px;
+  text-align      : center;
+  padding         : 2%;
+  border-radius   : 20px;
+  margin          : 30px auto 30px auto;
+  background-color: rgb(240, 240, 240);
+  box-shadow      : rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .not-null {
-  position: absolute;
-  top: 23px;
-  right: 0px;
-  color: #ed1846;
+  position : absolute;
+  top      : 23px;
+  right    : 0px;
+  color    : #ed1846;
   font-size: 20px;
-  z-index: 1;
-}
-.form-group{
-  display: block;
-  position: relative;
-  padding: 10px;
+  z-index  : 1;
 }
 
-.form-select{
+.form-group {
+  display : block;
+  position: relative;
+  padding : 10px;
+}
+
+.form-select {
   width: 100%;
+}
+
+p {
+  font-size  : xx-large;
+  font-weight: 500;
 }

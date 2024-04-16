@@ -44,3 +44,14 @@ table {
 th {
   text-align: center;
 }
+
+.filter{
+  background-color: #efefef;
+  padding: 12px 16px ;
+  margin-bottom: 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.line-2{
+  margin-top: 10px;
+}

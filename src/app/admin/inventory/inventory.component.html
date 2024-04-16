@@ -8,7 +8,7 @@
   <div class="item">
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256"><path fill="#212529" d="m213.66 82.34l-56-56A8 8 0 0 0 152 24H56a16 16 0 0 0-16 16v176a16 16 0 0 0 16 16h144a16 16 0 0 0 16-16V88a8 8 0 0 0-2.34-5.66ZM152 160h-16v16a8 8 0 0 1-16 0v-16h-16a8 8 0 0 1 0-16h16v-16a8 8 0 0 1 16 0v16h16a8 8 0 0 1 0 16Zm0-72V43.31L196.69 88Z"/></svg>
     <div class="content">
-      <button  style="width: 170px; height: 38px" class="btn btn-primary"><a routerLink="/admin/inventory-receipt">Export/Reciept</a></button>
+      <button  style="width: 170px; height: 38px" class="btn btn-primary"><a routerLink="/admin/inventory/inventory-receipt">Export/Reciept</a></button>
     </div>
   </div>
   <div class="item">
@@ -40,7 +40,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let ip of inventoryProducts">
-      <td> {{ip.id}} </td>
+      <td> {{ip.productId}} </td>
       <td> {{ip.productName}} </td>
       <td> {{ip.exportProductQty}}/{{ip.inventoryProductQty}} </td>
       <td> {{ip.color}} </td>

@@ -7,4 +7,5 @@ export class InventoryProductsize {
    productSize!: Productsize;
    quantity!: number;
    sizeNumber!: number;
+   productId!: number;
 }

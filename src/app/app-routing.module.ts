@@ -46,8 +46,7 @@ const routes: Routes = [
   { path: 'auth/reset-password', component: ResetPasswordComponent ,},
   { path: 'admin/dashboard', component: DashboardComponent ,},
   { path: 'admin/inventory', component: InventoryComponent ,},
-  { path: 'admin/inventory-receipt', component: InventoryReceiptComponent ,},
-
+  { path: 'admin/inventory/inventory-receipt', component: InventoryReceiptComponent },
 ];
 
 @NgModule({

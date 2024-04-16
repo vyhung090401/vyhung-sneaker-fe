@@ -4,6 +4,92 @@
     <div (click)="getOrderByStatus(s)" [class.selected]="s === selectedStatus" class="status-item">{{s}}</div>
   </div>
 </div>
+<div class="filter">
+  <div class="row">
+    <div class="col-2 fw-bold ">
+      Inventory
+    </div>
+    <div class="col-2 fw-bold">
+      Product
+    </div>
+    <div class="col-2 fw-bold">
+      Color
+    </div>
+    <div class="col-2 fw-bold">
+      Brand
+    </div>
+    <div class="col-2 fw-bold">
+      Status
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <select class="form-select" name="" id="" >
+      </select>
+    </div>
+    <div class="col">
+      <input class="form-control" type="text" placeholder="Enter value..." >
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <div>
+            <span>Select Color</span>
+          </div>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="dropdown-item"><input type="checkbox" ></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <div>
+            <span>Select Brand</span>
+            <span></span>
+          </div>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="dropdown-item"><input type="checkbox" ></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="dropdown">
+        <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <div>
+            <span>Select Status</span>
+          </div>
+        </div>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary" >
+        <i class="fa fa-filter"></i>
+        Filter
+      </button>
+    </div>
+  </div>
+  <div class="row line-2">
+    <div class="col-2 fw-bold">
+      Min Price
+    </div>
+    <div class="col-2 fw-bold">
+      Max Price
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-2">
+      <input type="text" class="form-control" placeholder="Enter Min Price" >
+    </div>
+    <div class="col-2">
+      <input type="text" class="form-control" placeholder="Enter Max Price" >
+    </div>
+  </div>
+</div>
 <div style="display: flex;align-items: center;">
   <span>Find Order: </span>
   <input type="text" class="form-control" style="width: 200px;" placeholder="Enter Order's ID" [(ngModel)] = "enteredSearchValue" (ngModelChange)="onSearchTextChanged($event)">

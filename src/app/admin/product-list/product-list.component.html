@@ -1,98 +1,114 @@
 <h3 style="text-align: center; font-size: xx-large; font-weight: 500; padding-top: 3%;">PRODUCT LIST</h3>
-<div class="filter">
-  <div class="row">
-    <div class="col-2">
-      Inventory
-    </div>
-    <div class="col-2">
-      Product
-    </div>
-    <div class="col-2">
-      Color
-    </div>
-    <div class="col-2">
-      Brand
-    </div>
-    <div class="col-2">
-      Status
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <select class="form-select" name="" id="" [(ngModel)]="selectedInventory">
-        <option value="" selected >ALL</option>
-        <option *ngFor="let i of inventoryList" [value]="i.name">{{i.name}}</option>
-      </select>
-    </div>
-    <div class="col">
-      <input class="form-control" type="text" placeholder="Enter value..." [(ngModel)]="productInput">
-    </div>
-    <div class="col">
-      <div class="dropdown">
-        <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          <div>
-            <span *ngIf="!selectedColors.length">Select Color</span>
-            <span *ngFor="let color of selectedColors, let i = index">{{color}}
-              {{selectedColors.length>=2 && i!=selectedColors.length-1?', ':''}}
-            </span>
+<div class="accordion mb-3 " id="accordionExample">
+<div class="accordion-item">
+  <h2 class="accordion-header m-0 " id="headingTwo">
+    <button class="accordion-button collapsed px-2 py-1 expand-filter  " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+      Filter
+    </button>
+  </h2>
+  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+    <div class="accordion-body p-0 ">
+      <div class="filter" >
+        <div class="row">
+          <div class="col-2 fw-bold ">
+            Inventory
+          </div>
+          <div class="col-2 fw-bold">
+            Product
+          </div>
+          <div class="col-2 fw-bold">
+            Color
+          </div>
+          <div class="col-2 fw-bold">
+            Brand
+          </div>
+          <div class="col-2 fw-bold">
+            Status
           </div>
         </div>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li *ngFor="let c of colorList" class="dropdown-item"><input type="checkbox" (change)="onColorCheckboxChange(c)">&#160;{{c}}</li>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <div class="dropdown">
-        <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          <div>
-            <span *ngIf="!selectedBrands.length">Select Brand</span>
-            <span *ngFor="let brand of selectedBrands, let i = index">{{brand}}{{selectedBrands.length>=2&&i!=selectedBrands.length-1?', ':''}}</span>
+        <div class="row">
+          <div class="col">
+            <select class="form-select" name="" id="" [(ngModel)]="selectedInventory">
+              <option value="" [selected]="selectedInventory" >ALL</option>
+              <option *ngFor="let i of inventoryList" [value]="i.name">{{i.name}}</option>
+            </select>
+          </div>
+          <div class="col">
+            <input class="form-control" type="text" placeholder="Enter value..." [(ngModel)]="productInput">
+          </div>
+          <div class="col">
+            <div class="dropdown">
+              <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <div>
+                  <span *ngIf="!selectedColors.length">Select Color</span>
+                  <span *ngFor="let color of selectedColors, let i = index">{{color}}
+                    {{selectedColors.length>=2 && i!=selectedColors.length-1?', ':''}}
+                  </span>
+                </div>
+              </div>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let c of colorList" class="dropdown-item"><input type="checkbox" (change)="onColorCheckboxChange(c)">&#160;{{c}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="dropdown">
+              <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <div>
+                  <span *ngIf="!selectedBrands.length">Select Brand</span>
+                  <span *ngFor="let brand of selectedBrands, let i = index">{{brand}}{{selectedBrands.length>=2&&i!=selectedBrands.length-1?', ':''}}</span>
+                </div>
+              </div>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let b of brandList" class="dropdown-item"><input type="checkbox" (change)="onBrandCheckboxChange(b)">&#160;{{b}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="dropdown">
+              <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <div>
+                  <span *ngIf="!selectedStatus.length">Select Status</span>
+                  <span *ngFor="let s of selectedStatus, let i = index">&#160;{{s}}{{selectedStatus.length>=2&&i!=selectedStatus.length-1?', ':''}}</span>
+                </div>
+              </div>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li class="dropdown-item"><input type="checkbox" (change)="onStatusCheckboxChange('Available')">&#160;Available</li>
+                <li class="dropdown-item"><input type="checkbox" (change)="onStatusCheckboxChange('Unavailable')">&#160;Unavailable</li>
+                <li class="dropdown-item"><input type="checkbox" (change)="onStatusCheckboxChange('OutOfStock')">&#160;Out Of Stock</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <button class="btn btn-primary" (click)="filterProducts()">
+              <i class="fa fa-filter"></i>
+              Filter
+            </button>
           </div>
         </div>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li *ngFor="let b of brandList" class="dropdown-item"><input type="checkbox" (change)="onBrandCheckboxChange(b)">&#160;{{b}}</li>
-        </ul>
-      </div>
-    </div>
-    <div class="col">
-      <div class="dropdown">
-        <div class="form-select" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          <div>
-            <span *ngIf="!selectedStatus.length">Select Status</span>
-            <span *ngFor="let s of selectedStatus, let i = index">&#160;{{s}}{{selectedStatus.length>=2&&i!=selectedStatus.length-1?', ':''}}</span>
+        <div class="row line-2">
+          <div class="col-2 fw-bold">
+            Min Price
+          </div>
+          <div class="col-2 fw-bold">
+            Max Price
           </div>
         </div>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li class="dropdown-item"><input type="checkbox" (change)="onStatusCheckboxChange('Available')">&#160;Available</li>
-          <li class="dropdown-item"><input type="checkbox" (change)="onStatusCheckboxChange('Unavailable')">&#160;Unavailable</li>
-          <li class="dropdown-item"><input type="checkbox" (change)="onStatusCheckboxChange('OutOfStock')">&#160;Out Of Stock</li>
-        </ul>
+        <div class="row ">
+          <div class="col-2">
+            <input type="text" class="form-control" placeholder="Enter Min Price" [(ngModel)]="minPrice">
+          </div>
+          <div class="col-2">
+            <input type="text" class="form-control" placeholder="Enter Max Price" [(ngModel)]="maxPrice">
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col">
-      <button class="btn btn-primary" (click)="filterProducts()">
-        <i class="fa fa-filter"></i>
-        Filter
-      </button>
-    </div>
   </div>
-  <div class="row line-2">
-    <div class="col-2">
-      Min Price
-    </div>
-    <div class="col-2">
-      Max Price
-    </div>
-  </div>
-  <div class="row ">
-    <div class="col-2">
-      <input type="text" class="form-control" placeholder="Enter Min Price" [(ngModel)]="minPrice">
-    </div>
-    <div class="col-2">
-      <input type="text" class="form-control" placeholder="Enter Max Price" [(ngModel)]="maxPrice">
-    </div>
-  </div>
+</div>
+</div>
+<div class="collapse" id="collapseExample">
+
 </div>
 <div class="d-flex align-items-center" style="padding-bottom: 10px;">
   <button class="btn btn-success" (click)="openCreateDialog()">
@@ -134,7 +150,7 @@
     </tr>
   </tbody>
 </table>
-<nav aria-label="Page navigation example">
+<nav aria-label="Page navigation example" *ngIf="products.length">
   <ul class="pagination justify-content-center">
     <li class="page-item" [ngClass]="currentPage === 0 ? 'disabled' : 'page-item'">
       <a  class="page-link" href="javascript:void(0)" (click)="goToPage(currentPage - 1)">Previous</a>

@@ -32,73 +32,72 @@ export class DashboardComponent implements OnInit {
   totalSaleOfMonth?: number;
   brandList: String[] = [];
   selectedCategory = 'Brands';
-  category = ['Brands','Sales','Orders','Accounts'];
+  category = ['Brands', 'Sales', 'Orders', 'Accounts'];
   lineChartData = {
     labels: [{}],
-    datasets:[
+    datasets: [
       {
         data: [],
         label: 'Revenue',
-      }
-    ]
+      },
+    ],
   };
   lineChartDataOption: ChartOptions = {
     scales: {
       x: {
         display: true,
-        title:{
+        title: {
           display: true,
-          text:'Days',
+          text: 'Days',
         },
       },
       y: {
         display: true,
-        title:{
+        title: {
           display: true,
-          text:'Revenue'
-        }
-      }
-    }
+          text: 'Revenue',
+        },
+      },
+    },
   };
   barChartDataOption = {
     scales: {
       x: {
         display: true,
-        title:{
+        title: {
           display: true,
-          text:''
-        }
+          text: '',
+        },
       },
       y: {
         display: true,
-        title:{
+        title: {
           display: true,
-          text:'Revenue'
-        }
-      }
-    }
+          text: 'Revenue',
+        },
+      },
+    },
   };
   barChartData = {
     labels: [{}],
-    datasets:[
+    datasets: [
       {
         data: [{}],
         label: 'Revenue',
-      }
-    ]
+      },
+    ],
   };
   pieChartData: any = {
     labels: [],
-    datasets:[
+    datasets: [
       {
         data: [],
         label: 'Status',
-      }
-    ]
+      },
+    ],
   };
-  pieDataOption : ChartOptions = {
+  pieDataOption: ChartOptions = {
     responsive: true,
-
   };
   // month = new Date().getMonth()+1
   // year = new Date().getFullYear();
@@ -112,13 +111,15 @@ export class DashboardComponent implements OnInit {
     private accountService: AccountService,
     private orderService: OrderService,
     private productService: ProductService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
-
 
   ngOnInit(): void {
     // this.myDateValue = new Date();
-    console.log(this.myDateValue.getMonth()+1,this.myDateValue.getFullYear());
+    console.log(
+      this.myDateValue.getMonth() + 1,
+      this.myDateValue.getFullYear()
+    );
     this.fetchAccounts();
     this.getOrderList();
     this.fetchProducts();
@@ -128,33 +129,46 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchAccounts(): void {
-    this.accountService.getAccountsList(this.searchText, this.currentPage, this.pageSize).subscribe((res) => {
-      this.accounts = res.content;
-      this.totalAccount = res.totalElements;
-    },(err) => console.error());
+    this.accountService
+      .getAccountsList(this.currentPage, this.pageSize)
+      .subscribe(
+        (res) => {
+          this.accounts = res.content;
+          this.totalAccount = res.totalElements;
+        },
+        (err) => console.error()
+      );
   }
 
-  getOrderList(){
-    this.orderService.getOrderList(this.currentPage, this.pageSize).subscribe((res: any) => {
-      console.log(res.content)
-      this.orders = res.content;
-      this.totalOrder = res.totalElements;
-    },(err) => console.error());
+  getOrderList() {
+    this.orderService.getOrderList(this.currentPage, this.pageSize).subscribe(
+      (res: any) => {
+        console.log(res.content);
+        this.orders = res.content;
+        this.totalOrder = res.totalElements;
+      },
+      (err) => console.error()
+    );
   }
 
-  getTotalSales(){
+  getTotalSales() {
     this.orderService.getAllOrderList().subscribe((res: any) => {
       this.totalSale = res.reduce((prev: number, cur: Order) => {
         return prev + cur.orderTotal!;
       }, 0);
-    })
+    });
   }
 
   fetchProducts(): void {
-    this.productService.getProductsList(this.currentPage, this.pageSize).subscribe((res: any) => {
-      this.products = res.content;
-      this.totalProduct = res.totalElements;
-    },(err) => console.error());
+    this.productService
+      .getProductsList(this.currentPage, this.pageSize)
+      .subscribe(
+        (res: any) => {
+          this.products = res.content;
+          this.totalProduct = res.totalElements;
+        },
+        (err) => console.error()
+      );
   }
 
   getChartByCategory(category: string) {
@@ -163,13 +177,26 @@ export class DashboardComponent implements OnInit {
     this.loadedPieChart = false;
     console.log(category);
     this.selectedCategory = category;
-    if(this.selectedCategory === 'Sales'){
-      this.getRevenueDaily(this.myDateValue.getMonth()+1,this.myDateValue.getFullYear());
-    } else if(this.selectedCategory === 'Brands'){
-      this.getBrandsRevenueDaily(this.myDateValue.getMonth()+1,this.myDateValue.getFullYear());
-    } else if(this.selectedCategory === 'Orders'){
-      this.statisticStatusOrder(this.myDateValue.getMonth()+1,this.myDateValue.getFullYear());
-    }else this.getTop10AccountConsume(this.myDateValue.getMonth()+1,this.myDateValue.getFullYear());
+    if (this.selectedCategory === 'Sales') {
+      this.getRevenueDaily(
+        this.myDateValue.getMonth() + 1,
+        this.myDateValue.getFullYear()
+      );
+    } else if (this.selectedCategory === 'Brands') {
+      this.getBrandsRevenueDaily(
+        this.myDateValue.getMonth() + 1,
+        this.myDateValue.getFullYear()
+      );
+    } else if (this.selectedCategory === 'Orders') {
+      this.statisticStatusOrder(
+        this.myDateValue.getMonth() + 1,
+        this.myDateValue.getFullYear()
+      );
+    } else
+      this.getTop10AccountConsume(
+        this.myDateValue.getMonth() + 1,
+        this.myDateValue.getFullYear()
+      );
   }
 
   getBrandList(): void {
@@ -178,74 +205,74 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getDate(date: any){
+  getDate(date: any) {
     this.loadedSalesChart = false;
     this.loadedBarChart = false;
     this.loadedPieChart = false;
     this.days = [];
     console.log(date);
     this.myDateValue = date;
-    if(this.selectedCategory === 'Sales'){
-      this.getRevenueDaily(date.getMonth()+1,date.getFullYear());
-    } else if(this.selectedCategory === 'Brands'){
-      this.getBrandsRevenueDaily(date.getMonth()+1,date.getFullYear());
-    } else if(this.selectedCategory === 'Orders'){
-      this.statisticStatusOrder(date.getMonth()+1,date.getFullYear());
-    } else this.getTop10AccountConsume(date.getMonth()+1,date.getFullYear());
+    if (this.selectedCategory === 'Sales') {
+      this.getRevenueDaily(date.getMonth() + 1, date.getFullYear());
+    } else if (this.selectedCategory === 'Brands') {
+      this.getBrandsRevenueDaily(date.getMonth() + 1, date.getFullYear());
+    } else if (this.selectedCategory === 'Orders') {
+      this.statisticStatusOrder(date.getMonth() + 1, date.getFullYear());
+    } else this.getTop10AccountConsume(date.getMonth() + 1, date.getFullYear());
   }
 
-
-  getRevenueDaily(month: number, year: number){
-    console.log(month,year);
-    this.orderService.getRevenueByMonth(month,year).subscribe((res: any) => {
+  getRevenueDaily(month: number, year: number) {
+    console.log(month, year);
+    this.orderService.getRevenueByMonth(month, year).subscribe((res: any) => {
       console.log(res);
-      this.lineChartData.datasets[0].data=res;
-      this.getDaysInMonth(month,year);
+      this.lineChartData.datasets[0].data = res;
+      this.getDaysInMonth(month, year);
       this.totalSaleOfMonth = res.reduce((prev: number, cur: number) => {
         return prev + cur;
       }, 0);
     });
   }
 
-  getBrandsRevenueDaily(month: number, year: number){
+  getBrandsRevenueDaily(month: number, year: number) {
     const data: number[] = [];
     this.getBrandList();
-    this.orderService.getBrandsRevenueByMonth(month,year).subscribe((res: any) => {
-      for (let i = 0; i < this.barChartData.labels.length; i++) {
-        let found = false;
-        for (let j = 0; j < res.length; j++) {
-          if (this.barChartData.labels[i] === res[j][0]) {
-            data.push(res[j][1]);
-            found = true;
-            break;
+    this.orderService
+      .getBrandsRevenueByMonth(month, year)
+      .subscribe((res: any) => {
+        for (let i = 0; i < this.barChartData.labels.length; i++) {
+          let found = false;
+          for (let j = 0; j < res.length; j++) {
+            if (this.barChartData.labels[i] === res[j][0]) {
+              data.push(res[j][1]);
+              found = true;
+              break;
+            }
+          }
+          if (!found) {
+            data.push(0);
           }
         }
-        if (!found) {
-          data.push(0);
-        }
-      }
-      console.log(data);
-      this.barChartData.datasets[0].data = data;
-      this.barChartDataOption.scales.x.title.text='Brands'
-      this.loadedBarChart = true;
-    });
+        console.log(data);
+        this.barChartData.datasets[0].data = data;
+        this.barChartDataOption.scales.x.title.text = 'Brands';
+        this.loadedBarChart = true;
+      });
   }
 
-  getTop10AccountConsume(month: number, year: number){
-    this.orderService.get10AcountConsume(month,year).subscribe((res: any) => {
+  getTop10AccountConsume(month: number, year: number) {
+    this.orderService.get10AcountConsume(month, year).subscribe((res: any) => {
       console.log(res);
       this.barChartData.labels = [];
       this.barChartData.datasets[0].data = [];
       res.forEach((r: any) => {
         this.barChartData.labels.push(r[0]);
         this.barChartData.datasets[0].data.push(r[1]);
-        this.barChartDataOption.scales.x.title.text='Top 10 Accounts Consume'
+        this.barChartDataOption.scales.x.title.text = 'Top 10 Accounts Consume';
         this.loadedBarChart = true;
-
       });
       console.log(this.pieChartData.labels);
       console.log(this.pieChartData.datasets[0].data);
-    })
+    });
   }
 
   getDaysInMonth(month: number, year: number) {
@@ -261,7 +288,6 @@ export class DashboardComponent implements OnInit {
 
     this.lineChartData.labels = this.days;
     this.loadedSalesChart = true;
-
   }
 
   onOpenCalendar(container: any) {
@@ -269,41 +295,41 @@ export class DashboardComponent implements OnInit {
       container._store.dispatch(container._actions.select(event.date));
     };
     container.setViewMode('month');
-   }
+  }
 
   // onBarClick(event: any){
   //   console.log(event.active[0].index);
   // }
 
-  openDialogProductChart(event: any):void {
-    const brand = event.active[0].index
+  openDialogProductChart(event: any): void {
+    const brand = event.active[0].index;
     const dialogRef = this.dialog.open(DialogDashboardProductComponent, {
-      width: "1100px",
-      data:{
-        message:"Product Details",
+      width: '1100px',
+      data: {
+        message: 'Product Details',
         title: this.barChartData.labels[brand],
-        date: this.myDateValue
-    },
+        date: this.myDateValue,
+      },
     });
     // dialogRef.afterClosed().subscribe(result => {
     //   this.fetchProducts()
     // });
   }
 
-  statisticStatusOrder(month:number, year: number){
-    this.orderService.getStatisticStatusOrder(month,year).subscribe((res: any) => {
-      console.log(res);
-      this.pieChartData.labels = [];
-      this.pieChartData.datasets[0].data = [];
-      res.forEach((r: any) => {
-        this.pieChartData.labels.push(r[0]);
-        this.pieChartData.datasets[0].data.push(r[1]);
-        this.loadedPieChart = true;
-
+  statisticStatusOrder(month: number, year: number) {
+    this.orderService
+      .getStatisticStatusOrder(month, year)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.pieChartData.labels = [];
+        this.pieChartData.datasets[0].data = [];
+        res.forEach((r: any) => {
+          this.pieChartData.labels.push(r[0]);
+          this.pieChartData.datasets[0].data.push(r[1]);
+          this.loadedPieChart = true;
+        });
+        console.log(this.pieChartData.labels);
+        console.log(this.pieChartData.datasets[0].data);
       });
-      console.log(this.pieChartData.labels);
-      console.log(this.pieChartData.datasets[0].data);
-    })
   }
-
 }

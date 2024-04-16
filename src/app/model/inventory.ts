@@ -1,5 +1,5 @@
 export class Inventory {
   id?:number | undefined;
-  name:string | undefined;
+  name!:string ;
   address:string | undefined;
 }

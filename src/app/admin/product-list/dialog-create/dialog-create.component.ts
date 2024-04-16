@@ -11,6 +11,8 @@ import { SizeService } from 'src/app/service/size.service';
 import { ProductService } from 'src/app/service/product.service';
 import { ToastrService } from 'ngx-toastr';
 import { InventoryService } from 'src/app/service/inventory.service';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-dialog-create',
@@ -30,7 +32,9 @@ export class DialogCreateComponent {
   isSubmitted = false;
   isLoaded = false;
   inventoryList: Inventory[] = [];
+  defaultInventory = '';
   brandList: string[] = [];
+  isClosed = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogCreateComponent>,
@@ -41,7 +45,9 @@ export class DialogCreateComponent {
     private sizeService: SizeService,
     private productService: ProductService,
     private toast: ToastrService,
-    private inventoryService: InventoryService
+    private inventoryService: InventoryService,
+    private router: Router,
+    private storageService: StorageService,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -50,57 +56,19 @@ export class DialogCreateComponent {
       status: ['', Validators.required],
       color: ['', Validators.required],
       brand: ['', Validators.required],
-      image: ['', Validators.required],
-      productSize: this.fb.array([])
+      image: ['', Validators.required]
     });
 
     this.goodsReceiptForm = this.fb.group({
-      inventoryName: ['', Validators.required],
-      purchasePrice: ['', Validators.required],
-      retailPrice: ['', Validators.required],
+      inventoryName: ['', Validators.required]
     });
 
-    this.getSizeList();
     this.getInventoryList();
-  }
-
-  get productSize(){
-    return this.productForm.get('productSize') as FormArray;
   }
 
   getBrandList(): void {
     this.productService.getBrandList().subscribe((res: any) => {
       this.brandList = res;
-    });
-  }
-
-  getSizeNumber(i: number) {
-    const control = this.productForm.get('productSize') as FormArray;
-
-    if (control) {
-      const group = control.at(i);
-
-      if (group) {
-        return group.get('sizeNumber')?.value;
-      }
-    }
-  }
-
-  newSize(quantity: number,sizeNumber: number): FormGroup {
-    return this.fb.group({
-      quantity: [quantity,[Validators.required,Validators.pattern('^[0-9]*$')]],
-      sizeNumber,
-    });
-  }
-
-  getSizeList(){
-    this.sizeService.getSizeList().subscribe((res: any) => {
-      console.log(res)
-      this.size = res;
-      this.size.forEach(size => {
-        this.productSize.push(this.newSize(0,size.sizeNumber));
-      })
-      this.isLoaded = true;
     });
   }
 
@@ -129,8 +97,6 @@ export class DialogCreateComponent {
     }
   }
 
-
-
   showSuccess(message:any, title:any) {
     this.toast.success(message, title,{
       timeOut: 2000,
@@ -146,23 +112,25 @@ export class DialogCreateComponent {
         color: this.productForm.controls['color'].value,
         brand: this.productForm.controls['brand'].value,
         status: this.productForm.controls['status'].value,
-        imagefile: this.imageSelect,
-        productSizes: this.productForm.controls['productSize'].value,
+        imagefile: this.imageSelect
       }
 
       const inventoryProduct = {
         inventoryName: this.goodsReceiptForm.controls['inventoryName'].value,
-        purchasePrice: this.goodsReceiptForm.controls['purchasePrice'].value,
-        retailPrice: this.goodsReceiptForm.controls['retailPrice'].value,
       }
 
       console.log(inventoryProduct);
 
       console.log(product);
       const productFormData = this.prepareFormData(product,inventoryProduct);
-      this.productService.createProduct(productFormData).subscribe(data =>{
+      this.productService.createProduct(productFormData).subscribe((data: any) =>{
+        this.isClosed = true;
+        console.log(data);
+        this.storageService.productChange.next(data.id);
+        this.router.navigate(['admin/inventory/inventory-receipt']);
         this.showSuccess('Add Product Successfully','Notification');
       },error => console.error());
+
     }
   }
 
